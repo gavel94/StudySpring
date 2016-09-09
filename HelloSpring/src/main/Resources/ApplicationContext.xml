@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        " default-autowire="byName">
+
+    <context:property-placeholder location="classpath:config.properties"/>
+
+    <context:annotation-config/>
+
+    <bean name="hello" class="com.huangjiahua.model.Hello">
+        <property name="name" value="#{'Spring'}"/>
+    </bean>
+
+    <context:component-scan base-package="com"/>
+
+    <aop:aspectj-autoproxy/>
+
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+          init-method="init" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.druid.driver-class}" />
+        <property name="url" value="${jdbc.druid.driver-url}" />
+        <property name="username" value="${jdbc.user}" />
+        <property name="password" value="${jdbc.password}" />
+        <property name="initialSize" value="${jdbc.druid.connection-initial-size}" />
+        <property name="minIdle" value="${jdbc.druid.connection-minimum-size}" />
+        <property name="maxActive" value="${jdbc.druid.connection-maximum-size}" />
+        <property name="maxWait" value="${jdbc.druid.connection-maxwait-time}" />
+        <property name="timeBetweenEvictionRunsMillis" value="${jdbc.druid.connection-maxactive-time}" />
+        <property name="minEvictableIdleTimeMillis" value="${jdbc.druid.connection-minlive-time}" />
+        <property name="validationQuery" value="${jdbc.druid.connection-test-sql}" />
+        <property name="testWhileIdle" value="${jdbc.druid.test-while-idle}" />
+        <property name="testOnBorrow" value="${jdbc.druid.test-on-borrow}" />
+        <property name="testOnReturn" value="${jdbc.druid.test-on-return}" />
+        <property name="poolPreparedStatements" value="${jdbc.druid.pool-prepared-statements}" />
+        <property name="connectionProperties" value="config.decrypt=${jdbc.druid.config.decrypt}" />
+        <property name="filters" value="mergeStat,config" />
+    </bean>
+
+</beans>
