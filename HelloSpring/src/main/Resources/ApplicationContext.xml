@@ -9,7 +9,7 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
         " default-autowire="byName">
 
-    <context:property-placeholder location="classpath:config.properties"/>
+    <context:property-placeholder location="classpath:db.properties"/>
 
     <context:annotation-config/>
 
@@ -40,6 +40,10 @@
         <property name="poolPreparedStatements" value="${jdbc.druid.pool-prepared-statements}" />
         <property name="connectionProperties" value="config.decrypt=${jdbc.druid.config.decrypt}" />
         <property name="filters" value="mergeStat,config" />
+    </bean>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
     </bean>
 
 </beans>
