@@ -1,5 +1,7 @@
 package com.huangjiahua.model;
 
+import org.springframework.transaction.annotation.Transactional;
+
 /**
  * Created by jhhuang on 2016/9/9
  * QQ:781913268

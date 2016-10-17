@@ -25,6 +25,6 @@ public class App
         System.out.println("******************************");
         System.out.println(arithmeticCalculator.div(2,1));
         System.out.println("******************************");
-//        System.out.println(arithmeticCalculator.div(2,0));
+
     }
 }
